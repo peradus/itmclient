@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after*
+	these tags -->
+	
+	<!-- BEGIN ITMCLIENT -->
+		<script type="text/javascript" src="./js/itmobject_itmclient_test.js"> </script>
+		<script type="text/javascript" src="./js/itmobject_itmclient_itmclient.js"> </script>
+		<script type="text/javascript" src="./js/itmobject_itmclient_json.js"> </script>
+	
+		<script type="text/javascript" src="./js/itmclient_base.js"> </script>
+		<script type="text/javascript" src="./js/itmclient_json.js"> </script>
+		
+		<script type="text/javascript" src="./js/client_helpers.js"> </script>
+		<script type="text/javascript" src="./js/client_bsinput.js"> </script>
+		<script type="text/javascript" src="./js/client_bsbuttons.js"> </script>
+		<script type="text/javascript" src="./js/client_view.js"> </script>
+		
+		
+		<link rel="stylesheet" href="./css/itmclient.css">
+	<!-- END ITMCLIENT -->
+	
+	<!-- BEGIN JQUERY () -->
+		<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+	<!-- END JQUERY -->
+			  
+	<!-- BEGIN BOOTSTRAP  (http://getbootstrap.com/getting-started/) -->
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	<!-- END BOOTSTRAP -->
+
+    <title> ITMClient </title>
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div id="itmvMethodModalDialog"></div>
+		<div id="itmvInstanceSelector"></div>
+		<span id="updateCounter"></span>
+		<div id="itmvInstanceDetailed"></div>
+		<div id="itmvInstanceDetails"></div>
+		
+		<script>
+			var itmclient = new ITMClient_json();
+			var updateCounter=0;
+
+			function updateITMClientView(){
+				itmvUpdateIDs({
+					"itmvInstanceDetailed":""
+				},itmclient.selectedInstance());
+				
+				updateCounter++;
+				var updateElement=document.getElementById("updateCounter");
+				updateElement.innerHTML=updateCounter;
+			}
+			
+			
+			itmclient.onSelectedInstanceChanged=function(itmclient,from,to) { 
+				// reload itmobject after selected instance changed
+				itmclient.load(function(){
+					itmvUpdateIDs({
+						"itmvMethodModalDialog":"",
+						"itmvInstanceSelector":"",
+						"itmvInstanceDetailed":"",
+						"itmvInstanceDetails":""
+					},to);
+				});
+			};
+
+			// force screen update
+			itmclient.selectedInstance("");
+
+		</script>
+	</div>
+	</body>
+</html>
+
+

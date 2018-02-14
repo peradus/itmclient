@@ -1,0 +1,6 @@
+good example of objects in javascript
+http://stackoverflow.com/questions/2064731/good-example-of-javascripts-prototype-based-inheritance
+
+Understanding delete -  Perfection Kills
+Exploring Javascript by example
+http://perfectionkills.com/understanding-delete/

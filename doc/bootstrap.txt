@@ -1,0 +1,14 @@
+Vertical Nav
+https://codepen.io/mikeair/pen/Kfyin
+
+tiled images
+https://www.w3schools.com/bootstrap/bootstrap_images.asp
+
+tables
+https://www.w3schools.com/bootstrap/bootstrap_tables.asp
+
+input validation:
+https://webdesign.tutsplus.com/tutorials/html5-form-validation-with-the-pattern-attribute--cms-25145
+
+handy bootstrap sample generation!
+https://bootsnipp.com/

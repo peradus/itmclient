@@ -1,0 +1,13 @@
+<div class="itmobject_instances" data-instance="{{itmobjectInstanceName}}">
+
+    <ul class="list-group">
+  
+{{#each itmobject.instances}}
+        <li class="list-group-item">
+            {{ renderITMObjectTemplate ../itmobjectInstanceName 'compact' instance=@key }} 
+        </li>
+{{/each}}
+
+    </ul>
+
+</div>

@@ -1,0 +1,11 @@
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#" onclick="itmclient.selectedInstance('');">Home</a></li>
+
+    {{#each instances}}
+        {{#if this.active }}
+            <li class="breadcrumb-item active">{{ this.instanceName }}</li>
+        {{else}}
+            <li class="breadcrumb-item"><a href="#" onclick="itmclient.selectedInstance('{{this.instanceSelect}}');">{{ this.instanceName }}</a></li>
+        {{/if}}
+    {{/each}}
+</ol>

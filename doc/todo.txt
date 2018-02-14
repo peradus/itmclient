@@ -1,0 +1,15 @@
+# getITMObject(this._itmobject, setInstance);
+moet er uit, is niet volledig ITMObject functionaliteit
+voor optimalisaties zal er wel een getITMObjectData moeten komen, deze moet een ITMObjectData structuur aanleveren
+deze datastructuur moet worden gevuld met ITMCommands
+bv
+getITMObjectData(instance)
+{
+   return {
+      "instances":getInstances(instance)
+}
+
+}
+
+# moet er uit
+this._selectedITMObject = this.getITMObject(this._itmobject, setInstance);

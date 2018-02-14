@@ -1,0 +1,74 @@
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after*
+	these tags -->
+	
+	<!-- BEGIN JQUERY () -->
+		<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+	<!-- END JQUERY -->
+			  
+	<!-- BEGIN BOOTSTRAP  (http://getbootstrap.com/getting-started/) -->
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	<!-- END BOOTSTRAP -->
+
+    <title> ITMClient </title>
+
+</head>
+
+
+<body>
+	<script>
+	
+	SuperClass = function()
+	{
+		this.info = "I am superclass";
+		console.log("SuperClass:");
+	};
+
+	SuperClass.prototype.printInfo = function()
+	{
+		console.log("SuperClass printinfo");
+	};
+
+	SubClass = function(){};
+
+	SubClass.prototype = new SuperClass();
+
+	SubClass.prototype.printInfo = function()
+	{
+		console.log("SubClass printinfo");
+
+		this.constructor.prototype.printInfo();
+
+	};
+
+	Class3 = function(){};
+
+	Class3.prototype = new SubClass();
+
+	Class3.prototype.printInfo = function()
+	{
+		console.log("Class3 printinfo");
+
+		this.constructor.prototype.printInfo();
+
+	};
+
+	var sc = new Class3();
+	sc.printInfo();
+	
+	</script>
+	</body>
+</html>
+
+

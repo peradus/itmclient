@@ -1,0 +1,13 @@
+<!--- need code review on dropdowns!
+http://getbootstrap.com/components/#btn-dropdowns
+https://www.tutorialrepublic.com/twitter-bootstrap-tutorial/bootstrap-dropdowns.php
+
+-->
+<div class="itmobject_instance_methods" itmobject-instance="{{itmobjectInstanceName}}">
+    <div class="btn-group">
+        {{#each parameters.methods}}
+            {{ renderITMObjectTemplate ../itmobjectInstanceName 'method' methodName=@key method=this }}
+        {{/each}}
+    </div>
+</div>
+

@@ -1,0 +1,26 @@
+Template folder for ITMObjects
+
+contains handlebars templates in each ITMObject Class folder
+
+.\templates\itmobjects\<classname>\
+required:
+itmobject-detailed.handlebars	== main itmobject view, contains all data
+itmobject-compact.handlebars	== compact itmobject view, used as instance
+itmobject-status.handlebars	== itmobject status view
+itmobject-instances.handlebars	== itmobject instances
+itmobject-methods.handlebars	== itmobject methods
+itmobject-properties.handlebars	== itmobject properties
+
+Data sent to template:
+var templateData={
+    "itmobject"                     == itmobject containing all data
+    "itmobjectInstanceName"         == itmobject complete instance name
+    "isSelected"                    == true/false, is this itmobject currently selected by client
+}
+
+
+.\templates\itmobjects\itmobject\	== default itmobject view(must be configured!)
+
+
+AFTER ANY CHANGE DO: compile-itmobjects.cmd
+this will generate templates into .\js\templates.js for use with Handlebars.

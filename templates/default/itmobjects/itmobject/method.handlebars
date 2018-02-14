@@ -1,0 +1,126 @@
+<!-- method has submethods, prepare drop down 
+parameters.parentMethod=[{{parameters.parentMethod}}]
+parameters.methodName=[{{parameters.methodName}}]
+
+{{debug 'method.parameters' parameters }}
+-->
+{{#if parameters.method.methods}}
+   <div class="dropdown">
+{{/if}}
+
+<!-- start button -->
+{{#if parameters.parentMethod }}
+   <!-- start submethod -->
+   <a href="#" data-toggle="dropdown" class="dropdown-toggle"
+
+   {{#unless parameters.method.methods}}
+      onclick="itmclient.doInstanceMethod('{{itmobjectInstanceName}}','{{parameters.methodName}}'); closeAllDropDownMethods(this);"
+   {{/unless}}
+>
+
+{{else}}
+   {{#if parameters.method.methods}}
+      <!-- button has submethods -->
+      <button type="button"
+               class="btn btn-primary btn-xs dropdown-toggle" 
+               data-toggle="dropdown"
+               aria-haspopup="true" 
+               aria-expanded="true"
+   {{else}}
+      <!-- button has no submethods -->
+      {{#if parameters.method.parameters}}
+            <!-- button must handle parameters -->
+            <button type="button"
+                     class="btn btn-primary btn-xs dropdown-toggle" 
+                     data-toggle="modal"
+                     data-target="#{{string2id itmobjectInstanceName parameters.methodName 'modalDialog'}}"
+                     onclick="stopUpdateTimer(); buildModalDialogInstanceMethodParameters($('#{{string2id itmobjectInstanceName parameters.methodName 'modalDialog'}}'));"
+      {{else}}
+            <!-- button has no parameters -->
+            <button type="button"
+                     class="btn btn-primary btn-xs dropdown-toggle" 
+                     data-toggle="dropdown"
+                     aria-haspopup="true" 
+                     aria-expanded="true"
+                     onclick="itmclient.doInstanceMethod('{{itmobjectInstanceName}}','{{parameters.methodName}}'); closeAllDropDownMethods(this);"
+      {{/if}}
+
+   {{/if}}
+      >
+{{/if}}
+
+<!-- setup button name -->
+{{#if parameters.method.displayName }} {{ parameters.method.displayName }} {{else}} {{ parameters.methodName }} {{/if}}   
+{{#if parameters.method.methods }} <span class="caret"></span> {{else}} {{methodToGlyphIcon parameters.methodName }} {{/if}}
+{{#if parameters.method.parameters }} <span class="glyphicon glyphicon-list-alt"></span> {{/if}}
+
+<!-- end button -->
+{{#if parameters.parentMethod }}
+   <!-- end submethod -->
+   </a>
+{{else}}
+   <!-- end method -->
+</button>
+{{/if}}
+
+<!-- construct additional dependencies of methods: dropdown, modaldialog -->
+{{#if parameters.method.methods}}
+   <!-- construct method dropdown to contain submethods -->
+   <ul class="dropdown-menu">
+      {{#each parameters.method.methods }}
+            <!-- foreach method  -->
+            {{#if this.methods}}
+               <!-- prep method that has submethod --> 
+               <li class="dropdown-submenu">
+            {{else}}
+               <!-- prep method regular method --> 
+               <li>
+            {{/if}}
+            
+            <!-- output method --> 
+            {{ renderITMObjectTemplate ../itmobjectInstanceName 'method' methodName=(concat ../parameters.methodName '/' @key) method=this parentMethod=../parameters.methodName }}
+           
+            <!-- finish method -->
+            </li>
+      {{/each}}
+   </ul>   
+
+   <!-- method had submethods, finish -->
+   </div>
+{{else}}   
+   <!-- button has no submethods -->
+   
+      {{#if parameters.method.parameters}}
+            <!-- method has parameters, construct a parameter modal dialog -->
+            <div id="{{string2id itmobjectInstanceName parameters.methodName 'modalDialog'}}" class="modal fade" role="dialog" >
+                  <div class="modal-dialog">
+                        <form data-instance="{{itmobjectInstanceName}}" data-method="{{parameters.methodName}}">
+                              <!-- Modal content-->
+                              <div class="modal-content">
+                                    <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">
+                                          {{ itmobject.displayName }} - 
+                                          {{#if parameters.method.displayName }} {{ parameters.method.displayName }} {{else}} {{ parameters.methodName }} {{/if}}   
+                                    </h4>
+                                    </div>
+                                    <div class="modal-body">
+                                       <!-- modal dialog construction removed, will be dynamic created upon button press -->
+                                    </div>
+                                    <div class="modal-footer">
+                                          <button type="button" class="btn btn-default" data-dismiss="modal"  data-method="{{ parameters.methodName }}"
+                                                onclick="doModalDialogInstanceMethodParameters($(this)); startUpdateTimer();">
+                                                {{#if parameters.method.displayName }} {{ parameters.method.displayName }} {{else}} {{ parameters.methodName }} {{/if}}   
+                                          </button>      
+                                          
+                                          <button type="button" class="btn btn-default" data-dismiss="modal"
+                                             onclick="startUpdateTimer();">
+                                                Cancel
+                                          </button>
+                                    </div>
+                              </div>
+                        </form>
+                  </div>
+            </div>
+      {{/if}}
+{{/if}}

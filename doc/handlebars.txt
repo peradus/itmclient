@@ -1,0 +1,19 @@
+handlebars
+http://handlebarsjs.com/
+http://www.adamwadeharris.com/how-to-precompile-handlebars-templates/
+http://blog.teamtreehouse.com/getting-started-with-handlebars-js
+http://handlebarsjs.com/precompilation.html
+
+
+debug helpers
+http://blog.teamtreehouse.com/handlebars-js-part-3-tips-and-tricks
+
+@root
+https://github.com/wycats/handlebars.js/issues/196
+
+
+https://cloudfour.com/thinks/the-hidden-power-of-handlebars-partials/
+http://tutorialzine.com/2015/01/learn-handlebars-in-10-minutes/
+
+http://coenraets.org/blog/2011/12/tutorial-html-templates-with-mustache-js/
+

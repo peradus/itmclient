@@ -1,0 +1,10 @@
+#1:20160909: instance properties not as tab but as 'method' button, after click show on-top window with all properties. methods with parameters can be handled the same way
+#2:20160909: make #1 an option, show instanceproperties as tab next to instances or as popup dialog
+
+#2:20160909: input field helpers, for example input field to hold an instance selection, add button to show dialog with instance selector, after select instance place selectedinstance into input field
+
+
+#3:20170914: indicatie meer/minder instanties
+
+#4:zoek functie middels itm object(recursief)
+

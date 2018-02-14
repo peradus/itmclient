@@ -1,0 +1,36 @@
+
+ITMCLIENT JSON PROTOCOL TO ITMSERVER
+getITMObjectData
+Request
+
+SEND:
+sendJSON=
+{ "selectedInstance":"a\b",				// select instance a\b
+  "classname":"",					// get instance classname
+  "name":"",						// get instance name
+  "displayName":"",					// get instance displayname
+  "description":"",					// get instance description
+  "instances":"",					// get instances
+  "methods":"",						// get instance methods 
+  "properties":"",					// get instance properties
+  "propertyValue(<property>)":"",			// get instance property <property> value
+  "domethod(<method>)":"",				// do instance method <method>
+  "setpropertyvalue(<property>)":"<value>",		// set instance property <property> to <value>
+  "getpropertyvalue(<property>)":"",			// get instance property <property> value
+}
+
+RECEIVE:
+receivedJSON=
+{ "selectedInstance":"a\b",				// selected instance a\b
+  "classname":"classname",				// return instance classnam
+  "name":"a name",					// return instance name
+  "displayname":"displayname",				// return instance displayname
+  "description":"description",				// return instance description
+  "instances":"instanceid,instanceid,..",		// return instances
+  "methods":"",						// get instance methods as JSON string
+  "properties":"property1,property2,..",		// return instance properties as JSON string
+  "propertyvalue(<property>)":"propertyvalue",		// return instance property <property> value
+  "domethod(<method>)":"status",			// return status after do method <method>
+  "setpropertyvalue(<property>)":"value",		// set and return property <property> <value>
+  "getpropertyvalue(<property>)":"value",		// get instance property <property> value
+}

@@ -1,0 +1,32 @@
+http://stackoverflow.com/questions/29996145/visual-studio-code-compile-on-save
+
+
+You can do this with Build commands:
+
+Create a simple tsconfig.json with "watch": true (this will instruct compiler to watch all compiled files):
+
+{
+    "compilerOptions": {
+        "target": "es5",
+        "out": "js/script.js",
+        "watch": true
+    }
+}
+
+Note that files array is omitted, by default all *.ts files in all subdirectories will be compiled. You can provide any other parameters or change target/out, just make sure that watch is set to true.
+
+Configure your task (Ctrl+Shift+P -> Configure Task Runner):
+
+{
+    "version": "0.1.0",
+    "command": "tsc",
+    "showOutput": "silent",
+    "isShellCommand": true,
+    "problemMatcher": "$tsc"
+}
+
+Now press Ctrl+Shift+B to build the project. You will see compiler output in the output window (Ctrl+Shift+U).
+
+The compiler will compile files automatically when saved. To stop the compilation, press Ctrl+P -> > Tasks: Terminate Running Task
+
+I've created a project template specifically for this answer: typescript-node-basic

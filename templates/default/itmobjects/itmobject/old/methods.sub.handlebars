@@ -1,0 +1,34 @@
+<!--- need code review on dropdowns!
+http://getbootstrap.com/components/#btn-dropdowns
+https://www.tutorialrepublic.com/twitter-bootstrap-tutorial/bootstrap-dropdowns.php
+
+-->
+
+{{#unless parameters.parentmethod}}
+    <!-- parentmethod is NOT set -->
+    <div class="itmobject_instance_methods" itmobject-instance="{{itmobjectInstanceName}}">
+{{/unless}}
+
+{{#each parameters.methods}}
+    {{#unless this.methods}}
+        <!-- one single method -->
+        {{debug 'single method' parameters }}
+        {{#if parameters.parentmethod}} <li>  {{/if}}
+        {{ renderITMObjectTemplate ../itmobjectInstanceName 'method' methodName=@key method=this }}
+        {{#if parameters.parentmethod}} </li> {{/if}}
+        
+    {{else}}
+        <!-- method has submethods, prepare to do drop downlist-->
+        <li> {{ renderITMObjectTemplate ../itmobjectInstanceName 'method' methodName=@key method=this }}
+            <span class="dropdown">
+                <ul>
+                {{ renderITMObjectTemplate ../itmobjectInstanceName 'methods' parentmethod=@key methods=this.methods }}
+                </ul>
+            </span>
+        </li>
+    {{/unless}}
+{{/each}}
+
+{{#unless parameters.parentmethod}}
+    </div>
+{{/unless}}

@@ -1,0 +1,32 @@
+{{debug 'itmobject-property'}}
+
+<div class="itmobject_property" data-instance="{{itmobjectInstanceName}}" property="{{ parameters.propertyName }}">
+
+  <div class="form-group has-success">
+  
+    <label class="form-control-label" for="{{ parameters.propertyName }}" >{{ parameters.propertyName }}</label>
+    <small>{{ parameters.property.description }}</small>    
+      <input  id="{{ parameters.propertyName }}" 
+              value="{{ parameters.property.value }}" 
+              initialvalue="{{ parameters.property.value }}" 
+              description="{{ parameters.property.description }}" 
+              type="text" 
+              class="form-control itmobjectproperty" 
+              placeholder="{{ parameters.propertyName }}" 
+              onchange="validateITMObjectPropertyElement(this,'{{ itmobjectInstanceName }}');"
+              onkeyup="validateITMObjectPropertyElement(this,'{{ itmobjectInstanceName }}');"
+
+        {{#if parameters.property.match }}
+              match="{{ parameters.property.match }}"
+              data-match-error="{{ parameters.property.description }}"
+        {{else}}
+      
+        {{/if}}
+      >
+      
+      <span class="help-block"></span>
+      
+      
+  </div>
+</div>
+

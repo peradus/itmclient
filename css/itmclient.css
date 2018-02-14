@@ -1,0 +1,108 @@
+/* ITMCLIENT.CSS - Class file
+  #id
+  .class
+*/
+.media,
+.media-body {
+  overflow: visible;
+}
+
+.media:after,
+.media-body:after{
+ content:'';
+ clear:both;
+ display:block;
+}
+
+.container-full {
+  margin: 0 auto;
+  width: 100%;
+}
+
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -1px;
+}
+
+
+.itmobject_instance {
+	font-size:90%;
+}
+
+.itmobject_instance img {
+	width:64px;
+	height:64px;
+}
+
+.itmobject_instance_compact {
+	font-size:90%;
+  overflow:visible;
+}
+
+.itmobject_instance_compact img {
+	width:32px;
+	height:32px;
+}
+
+.itmobject_instances {
+	margin: 0 auto;
+  width: 100%;
+  overflow:visible;
+}
+
+.itmobject_instance_methods {
+  clear: both;
+  float: left; 
+  display: block;
+  position: relative;
+}
+
+.itmobject_status {
+  color:#000000;
+}
+.itmobject_status .media .media-left {
+  width: 64px;
+}
+
+.itmobject_status_running,
+.itmobject_status_ok,
+.itmobject_status_up {
+  background-color:#00cc00;
+  color:#ffffff;
+}
+
+.itmobject_status_stopped,
+.itmobject_status_error,
+.itmobject_status_down {
+  background-color:#cc0000;
+  color:#ffffff;
+}
+
+.itmobject_instance_properties {
+	
+}
+
+.itmobject_instance_property {
+	font-weight: normal;
+	color:black;
+}
+
+.itmobject_instance_property_changed, 
+.bsinput_changed {
+    font-weight: bold;	
+}
+
+.itmobject_instance_property_nomatch,
+.bsinput_nomatch  {
+ 	color: red !important;
+}
+
+.itmobject_instance_property_match,
+.bsinput_match {
+ 	color: black !important;
+}

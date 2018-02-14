@@ -1,0 +1,35 @@
+itmclient renders:
+Instance Selector View
+
+ITMObject View
+--------------------------
+- <itmobjectclassname>.tem
+
+ITMObject Instances TAB
+-----------------------------
+- foreach selected-itmobject instance
+- (2)<itmobjectclassname>-compact.tem
+-----------------------------
+
+ITMObject Properties TAB
+-----------------------------
+- foreach selected-itmobject property
+- (2)<itmobjectclassname>-property.tem
+-----------------------------
+
+
+itmobjects are defined in folder
+objects\<itmobjectclassname>
+
+contains initializer
+<itmobjectclassname>.js
+
+minimal required templates:
+(1)<itmobjectclassname>.tem
+base itmobject view, excluding instances, excluding properties
+
+<itmobjectclassname>-compact.tem
+itmobject compact view, to be used for displaying instance list
+
+<itmobjectclassname>-properties.tem
+

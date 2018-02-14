@@ -1,0 +1,34 @@
+<!-- if method has submethods -->
+{{#if parameters.method.methods }}
+
+<!-- method.handlebars: else: regular button -->
+<span class="dropdown">
+      <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+{{#if parameters.method.displayName }}
+            {{ parameters.method.displayName }} 
+{{else}}
+            {{ parameters.methodName }}
+{{/if}}   
+            <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+            <li><a href="#">Tablet</a></li>
+            <li><a href="#">Smartphone</a></li>
+      </ul>
+</span>
+{{else}}
+      <!-- method.handlebars: else: regular button -->
+      <button type="button" class="btn btn-primary btn-xs" data-toggle="tooltip" data-html="true" 
+            onclick="itmclient.doInstanceMethod('{{itmobjectInstanceName}}','{{parameters.methodName}}');"
+      > 
+      
+      {{methodToGlyphIcon parameters.methodName }}
+
+{{#if parameters.method.displayName }}
+            {{ parameters.method.displayName }} 
+{{else}}
+            {{ parameters.methodName }}
+{{/if}}
+      </button>
+      
+{{/if}}

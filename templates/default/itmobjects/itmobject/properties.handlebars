@@ -1,0 +1,18 @@
+{{ debug 'properties' }}
+        <div class="itmobject_properties" >
+            <form data-instance="{{itmobjectInstanceName}}">
+                
+{{#each itmobject.properties}}
+
+                {{ renderITMObjectTemplate ../itmobjectInstanceName 'property' propertyName=@key property=this }} 
+
+{{/each}}
+                <div class="help-block with-errors"></div>
+
+                <button type="button" onclick="saveITMObjectProperties($(this)); return false;">Save</button>
+                <button type="button" onclick="reloadITMObjectProperties($(this)); return false;">Reload</button>
+
+            </form>
+
+        </div>
+    

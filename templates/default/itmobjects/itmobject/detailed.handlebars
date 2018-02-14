@@ -1,0 +1,87 @@
+<div class="itmobject_instance" data-instance="{{itmobjectInstanceName}}">
+  <div class="media">
+
+    <div class="media-left">
+      {{ renderITMObjectTemplate itmobjectInstanceName 'image' }}
+      {{ renderITMObjectTemplate itmobjectInstanceName 'status' }}
+    </div>
+
+    <div class="media-body">
+      <h4 class="media-heading"> {{ renderITMObjectTemplate itmobjectInstanceName 'name' }} </h4>
+
+      <p>{{ itmobject.description}} </p>
+
+      {{ renderITMObjectTemplate itmobjectInstanceName 'methods' methods=itmobject.methods }}
+    </div>
+
+  </div>
+</div>
+
+{{#if itmobject.instances }}
+  <hr>
+{{else}}
+    {{#if itmobject.properties }}
+      <hr>
+    {{/if}}
+{{/if}}
+
+
+<div class="container">
+  <ul class="nav nav-tabs">
+{{#if itmobject.instances }}
+    <li class="active"><a data-toggle="tab" href="#instances">Instances</a></li>
+{{/if}}
+
+{{#if itmobject.properties }}
+  {{#if itmobject.instances }}
+   <!--- there are instances, properties is not active tab -->
+   <li>
+         <a data-toggle="tab" href="#properties">Properties</a>
+   </li>
+  {{else}}
+    <!--- there are no instances, properties is active tab -->
+    <li class="active">
+       <a data-toggle="tab" href="#properties">Properties</a>
+   </li>
+  {{/if}}
+{{/if}}
+
+  </ul>
+
+  <div class="tab-content">
+{{#if itmobject.instances }}
+    <div id="instances" class="tab-pane active">
+          <!-- Begin-Render-Instances -->
+          {{ renderITMObjectTemplate itmobjectInstanceName 'instances' }}
+          <!-- End-Render-Instances -->
+    </div>
+{{/if}}
+
+{{#if itmobject.properties }}
+  {{#if itmobject.instances }}
+    <!--- there are instances, properties is not active tab -->
+    <div id="properties" class="tab-pane">
+  {{else}}
+    <!--- there are no instances, properties is active tab -->
+    <div id="properties" class="tab-pane active">
+  {{/if}}
+        <!-- Begin-Render-Instances -->
+        {{ renderITMObjectTemplate itmobjectInstanceName 'properties' }}
+        <!-- End-Render-Instances -->
+    </div>
+{{/if}}
+  </div>
+
+</div>
+
+<script>
+
+$(document).ready(function(){
+  $('.dropdown-submenu a').on("click", function(e){
+    $(this).next('ul').toggle();
+    e.stopPropagation();
+    e.preventDefault();
+  });
+});
+
+</script>

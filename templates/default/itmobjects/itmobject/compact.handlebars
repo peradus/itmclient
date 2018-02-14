@@ -1,0 +1,17 @@
+  <div class="itmobject_instance_compact" data-instance="{{itmobjectInstanceName}}">
+    <div class="media">
+      <div class="media-left">
+        {{ renderITMObjectTemplate itmobjectInstanceName 'compact-image' }}
+        {{ renderITMObjectTemplate itmobjectInstanceName 'status' }}
+      </div>
+
+    <div class="media-body">
+      <h4 class="media-heading"> 
+        {{ renderITMObjectTemplate itmobjectInstanceName 'name' }} </h4>
+        <p>{{itmobject.description}}</p>
+        <div class="dropdown">
+          {{ renderITMObjectTemplate itmobjectInstanceName 'methods' methods=itmobject.methods }}
+        </div>
+    </div>
+  </div>
+</div>

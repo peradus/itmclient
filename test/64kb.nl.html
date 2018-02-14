@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+	.logo {
+		font-family: Impact, Charcoal, sans-serif;
+		font-size:150px;
+		opacity: 0.0;
+		
+		margin: auto;
+		position: absolute;
+		top: 0; left: 0; bottom: 0; right: 0;
+	}
+	</style>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	
+	<script>
+		var textArray=[
+		"Information",
+		"Technology",
+		"Managed",
+		"Objects",
+		"ITMObjects"];
+		
+		var speed=1000; // animation speed ms
+		var maxOpacity='0.5';
+		var textIndex=0;
+		
+		function animate()
+		{
+			console.log("animation started");
+			$("#text").html(textArray[textIndex]);
+
+			$("#text").animate({opacity: maxOpacity},speed,
+				function()
+				{	
+					$("#text").animate({opacity: "0.0"},speed,
+						function()
+						{
+							textIndex=textIndex+1;
+							if(textIndex>=textArray.length)
+							{
+								textIndex=0;
+							}
+						}
+					);
+				}
+			);
+		};
+		
+		$(document).ready(
+			function()
+			{
+				setInterval(animate(), 2000);
+				
+			}
+		);
+		
+	</script>
+
+</head>
+
+<body>
+
+	<div id="text" class="logo">Information</div>
+
+</body>
+</html>

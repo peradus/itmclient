@@ -1,0 +1,14 @@
+propertyname=
+(["]propertyname["])+
+
+instanceselector=
+<(["]instancename["])>(/["]instancename["])*
+
+instance property selector=
+instanceselector#propertyname
+
+instance method selector=
+instanceselector#methodname
+
+
+

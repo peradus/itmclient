@@ -1,0 +1,7 @@
+# global install rfxcom library
+npm install rfxcom -g
+
+# go to node project and link to global library
+cd ~/mynodeproject/
+npm link rfxcom
+ 

@@ -4,4 +4,16 @@ npm install rfxcom -g
 # go to node project and link to global library
 cd ~/mynodeproject/
 npm link rfxcom
- 
+
+
+# on the Beaglebone
+
+# latest firmware on the BeagleBone(!)
+# then	
+cd /usr/lib/node_modules/
+sudo chmod u+rwx,o+rwx,g+rwx -R ./node_modules/
+
+npm install -g node-gyp node-pre-gyp
+npm install -g serialport --unsafe-perm
+npm install -g rfxcom
+

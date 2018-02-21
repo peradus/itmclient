@@ -1,6 +1,6 @@
 var rfxcom = require('rfxcom');
 
-var rfxtrx = new rfxcom.RfxCom("com5", {debug: true});
+var rfxtrx = new rfxcom.RfxCom("/dev/ttyUSB0", {debug: true});
 
 rfxtrx.initialise(function () {
    console.log("Device initialised");

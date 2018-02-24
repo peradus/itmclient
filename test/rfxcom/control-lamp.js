@@ -25,25 +25,20 @@ rfxtrx.initialise(function () {
       var lighting2 = new rfxcom.Lighting2(rfxtrx, rfxcom.lighting2.HOMEEASY_EU);
       
       // get today's sunlight times
-      var times = SunCalc.getTimes(new Date(), lat, long);
+      var currentDateTime=new Date();
+      
+      var times = SunCalc.getTimes(currentDateTime, lat, long);
    
       // format sunrise time from the Date object
       var sunriseDateTime = times.sunriseEnd.getTime();
       var sunsetDateTime = times.sunsetStart.getTime();
    
-      var sunriseStr = times.sunriseEnd.getHours() + ':' + times.sunriseEnd.getMinutes();
-      var sunsetStr = times.sunsetStart.getHours() + ':' + times.sunsetStart.getMinutes();
-   
-      console.log("sunrise=",sunriseStr);
-      console.log("sunset=",sunsetStr);
-   
-      var currentDateTime=Date.now();
-   
       console.log("current datetime=",currentDateTime);
       console.log("sunrise datetime=",sunriseDateTime);
       console.log("sunset datetime=",sunsetDateTime);
    
-      var sunset=!(currentDateTime<sunsetDateTime) && (currentDateTime>sunriseDateTime);
+      var currentTime=currentDateTime.getTime();
+      var sunset=!((currentTime > sunriseDateTime) && (currentTime < sunsetDateTime));
       console.log("sunset=",sunset);
 
       if (sunset) {
@@ -57,10 +52,7 @@ rfxtrx.initialise(function () {
    
    }, checkIntervalms);
 
-
-
    // id 03 - 40 00 01
-   
    lighting2.switchOn("0x03400001/1");
    
 });

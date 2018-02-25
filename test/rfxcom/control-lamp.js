@@ -43,16 +43,14 @@ rfxtrx.initialise(function () {
 
       if (sunset) {
          // off lamp
-         lighting2.switchOff("0x03400001/1");
+         lighting2.switchOff(device_ID);
       }
       else {
          // on lamp
-         lighting2.switchOn("0x03400001/1");
+         lighting2.switchOn(device_ID);
       }
    
    }, checkIntervalms);
 
    // id 03 - 40 00 01
-   lighting2.switchOn("0x03400001/1");
-   
 });

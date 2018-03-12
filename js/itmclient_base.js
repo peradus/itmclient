@@ -4,9 +4,10 @@
  *
  * ****************************************************************************/
 
-/* ****************************************************************************
+/**
  * ITMCLIENT_BASE OBJECT-BEGIN
- * ****************************************************************************/
+ * 
+ */
 function ITMClient_base() {
     this._debug = true;
     this._debugModule = "ITMClient_base";
@@ -36,14 +37,6 @@ function ITMClient_base() {
     } else { /* if debug not defined, define empty function */
         this.debugMessage = function(message) {};
     }
-
-    /* ************************************************************************
-     * function ITMObject_base.getITMObject(obj,instance)  {
-     * - get ITMObject based on gived instance name
-     */
-    this.getITMObject = function(obj, instance, setobj) {
-        return getITMObject(obj, instance, setobj);
-    };
 
     /************************************************************************
      * function ITMObject_base.load(actionfinished)
@@ -457,6 +450,17 @@ function ITMClient_base() {
         return responseITMObject;
     }
 }
+
+/**
+ * getITMObject - get a selected ITMObject based on instance
+ * @param {*} obj - base ITMObject 
+ * @param {*} instance - selected instance to get
+ * @param {*} setobj - leave undefined, set if need new ITMObject
+ */
+ITMClient_base.prototype.getITMObject = function(obj, instance, setobj) {
+      return getITMObject(obj, instance, setobj);
+};
+
 
 /* ****************************************************************************
  * ITMCLIENT_BASE OBJECT-END

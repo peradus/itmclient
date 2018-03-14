@@ -146,20 +146,7 @@ function ITMClient_base() {
      */
     this.onSelectedInstanceChanged = function(itmclient, from, to) {};
 
-    /************************************************************************
-     * function ITMObject_base.doInstanceMethod(instance,method)
-     * - do <instance> <method>
-     */
-    this.doInstanceMethod = function(instance, method, callback) {
-        var methodResult = "";
-        methodResult = this.getInstanceStatus(instance);
-        this.debugMessage("itmClient: doInstanceMethod [{0}] method:[{1}], result=[{2}]".format(instance, method, methodResult));
-        if (isFunction(callback)) {
-            callback(methodResult);
-        }
-        return methodResult;
-    };
-
+    
     /************************************************************************
      * function ITMObject_base.getInstanceClassName(instance)
      * - get class name of instance
@@ -460,6 +447,23 @@ function ITMClient_base() {
 ITMClient_base.prototype.getITMObject = function(obj, instance, setobj) {
       return getITMObject(obj, instance, setobj);
 };
+
+
+/**
+ * function ITMObject_base.doInstanceMethod(instance,method)
+ * @param {*} instance - selected instance to get
+ * @param {*} method - method to be execute
+ * @param {*} callback - callback function after complete
+ */
+ITMClient_base.prototype.doInstanceMethod = function(instance, method, callback) {
+   var methodResult = this.getInstanceStatus(instance);
+   this.debugMessage("itmClient: doInstanceMethod [{0}] method:[{1}], result=[{2}]".format(instance, method, methodResult));
+   if (isFunction(callback)) {
+         callback(methodResult);
+   }
+   return methodResult;
+};
+
 
 
 /* ****************************************************************************

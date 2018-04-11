@@ -4,12 +4,13 @@
    */
 var updateTimerEnabled=true;
 
-function isFunction(x) { return typeof x == 'function';	};
-function isObject(x) { return typeof x == 'object';	};
-function isDefined(x) { return typeof x !== 'undefined';};
-function notDefined(x) { return typeof x == 'undefined';};
-function isString(x) {return typeof x === 'string';}
-function isArray(x) { return x.constructor===Array;	}
+function isFunction(x)        { return typeof x == 'function';	}
+function isObject(x)          { return typeof x == 'object'; }
+function isDefined(x)         { return typeof x !== 'undefined'; }
+function notDefined(x)        { return typeof x == 'undefined';} ;
+function isString(x)          { return typeof x === 'string'; }
+function isArray(x)           { return Array.isArray(x) }
+function hasJQueryResults(x)  { return x[0]; }
 
 function stopUpdateTimer() {
    updateTimerEnabled=false;
@@ -25,8 +26,11 @@ function startUpdateTimer() {
 // safe JSON parse function, empty string returns empty object
 function jsonParse(str) {
       var result={};
-      if (isString(str)) {
-            result=JSON.parse(str.trim());
+      try {
+         result=JSON.parse(str.trim());
+      }
+      catch(exception) {
+         result={}
       }
       return result;
 }
@@ -73,14 +77,9 @@ function INSTANCE_ITMOBJECT_FIELDS() {
 
 
 // JQUERY HELPER TO CHECK FOR RESULTS
-hasJQueryResults = function (el) {
-   return el.length !== 0;
-}
 
 function safeCallBack(callBackFunction, data) { 
-   if (isFunction(callBackFunction)) {
-         callBackFunction(data);
-      }
+   if (isFunction(callBackFunction)) callBackFunction(data);
 }
 
 function removeChildElements(el) {
@@ -100,26 +99,20 @@ String.prototype.format = function() {
       return formatted;
 };
 
+function instanceActiveTab() {
+   var el=$("#itmobject-detailed li.active a");
+   var activeTab="";
+   if (hasJQueryResults(el)){
+      activeTab=el.html().toLowerCase();
+   }
+   return activeTab;
+}
 function isInstanceTabActive() {
-   var activeTab=$("#itmobject-detailed li.active a");
-   if (hasJQueryResults(activeTab)){
-      activeTab=activeTab.html().toLowerCase();
-      return (activeTab=="instances");
-   }
-   else {
-      return false;
-   }
+   return (instanceActiveTab == "instances");
 }
 
 function isPropertyTabActive() {
-   var activeTab=$("#itmobject-detailed li.active a");
-   if (hasJQueryResults(activeTab)){
-      activeTab=activeTab.html().toLowerCase();
-      return (activeTab=="properties");
-   }
-   else {
-      return false;
-   }
+   return (instanceActiveTab == "properties");
 }
 
 /* ************************************************************************
@@ -258,7 +251,7 @@ function instanceStatus2StatusClass(instanceStatus) {
    var statusParts=instanceStatus.split(",");
    var instanceStatusClass=statusParts[0];
 
-   // replace invalid chars for better alternatives: 
+   // replace invalid chars in status to create a 'status-css-class'
    // / = .  
    // + = - 
    // = = _
@@ -531,7 +524,7 @@ function saveITMObjectProperties(element) {
 			}
 		});
 	}
-	// do not submit form, return false
+	// form not submitted, failed to validate
 	return false;
 }
 

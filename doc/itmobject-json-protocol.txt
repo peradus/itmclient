@@ -13,11 +13,22 @@ sendJSON=
   "instances":"",					// get instances
   "methods":"",						// get instance methods 
   "properties":"",					// get instance properties
-  "propertyValue(<property>)":"",			// get instance property <property> value
   "domethod(<method>)":"",				// do instance method <method>
-  "setpropertyvalue(<property>)":"<value>",		// set instance property <property> to <value>
-  "getpropertyvalue(<property>)":"",			// get instance property <property> value
+  "setpropertyvalue(<propertyname>)":"<value>",		// set instance property <propertyname> to <value>
+  "getpropertyvalue(<propertyname>)":"",			// get instance property <propertyname> value
 }
+
+Example method parameters:
+<method> = Start
+
+Example method parameters:
+<method> = MoveTo{
+			"host":{"value":"HOST"},
+			"priority":{"value":"123"}
+		}
+<propertyname> = var_init
+
+
 
 RECEIVE:
 receivedJSON=
@@ -26,11 +37,11 @@ receivedJSON=
   "name":"a name",					// return instance name
   "displayname":"displayname",				// return instance displayname
   "description":"description",				// return instance description
-  "instances":"instanceid,instanceid,..",		// return instances
+  "instances":"instancename,instancename,..",		// return instances
   "methods":"",						// get instance methods as JSON string
-  "properties":"property1,property2,..",		// return instance properties as JSON string
-  "propertyvalue(<property>)":"propertyvalue",		// return instance property <property> value
+  "properties":"propertyname,propertyname,..",		// return instance properties as JSON string
+  "propertyvalue(<propertyname>)":"propertyvalue",		// return instance property <propertyname> value
   "domethod(<method>)":"status",			// return status after do method <method>
-  "setpropertyvalue(<property>)":"value",		// set and return property <property> <value>
-  "getpropertyvalue(<property>)":"value",		// get instance property <property> value
+  "setpropertyvalue(<propertyname>)":"value",		// set and return property <propertyname> <value>
+  "getpropertyvalue(<propertyname>)":"value",		// get instance property <propertyname> value
 }

@@ -346,87 +346,66 @@ function ITMClient_base() {
             /* for each property in JSON request do 
              */
             for (var propertyName in json) {
-                var propertyValue = json[propertyName];
+               var propertyValue = json[propertyName];
 
-                /* "selectedinstance":"<instance>" */
-                if (propertyName.match(/^selectedInstance/i)) {
-                    responseITMObject[propertyName] = instance;
-                }
-                /* "instanceclassname":"" */
-                else if (propertyName.match(/^className/i)) {
-                    responseITMObject[propertyName] = this.getInstanceClassName(instance);
-                }
-                /* "instancename":"" */
-                else if (propertyName.match(/^name/i)) {
-                    responseITMObject[propertyName] = this.getInstanceName(instance);
-                }
-                /* "instancedisplayname":"" */
-                else if (propertyName.match(/^displayName/i)) {
-                    responseITMObject[propertyName] = this.getInstanceDisplayName(instance);
-                }
-                /* "instancedescription":"" */
-                else if (propertyName.match(/^description/i)) {
-                    responseITMObject[propertyName] = this.getInstanceDescription(instance);
-                }
-                /* "status":"" */
-                else if (propertyName.match(/^status/i)) {
-                    responseITMObject[propertyName] = this.getInstanceStatus(instance);
-                }
-                /* "instances":"" */
-                else if (propertyName.match(/^instances/i)) {
-                    responseITMObject[propertyName] = this.getInstances(instance);
-                }
-                /* "instancemethods":"" */
-                else if (propertyName.match(/^methods/i)) {
-                    responseITMObject[propertyName] = this.getInstanceMethods(instance);
-                }
-                /* "instanceproperties":"" */
-                else if (propertyName.match(/^properties/i)) {
-                    responseITMObject[propertyName] = this.getInstanceProperties(instance);
-                }
-                /* "domethod(<method>({json})":"" */
-                else if (propertyName.match(/^domethod/i)) {
-                    var myRegexp = /^domethod\((.+)\)$/g;
-                    var method = myRegexp.exec(propertyName);
+               /* "selectedinstance":"<instance>" */
+               if (propertyName.match(/^selectedInstance/i))  responseITMObject[propertyName] = instance;
+               /* "instanceclassname":"" */
+               if (propertyName.match(/^className/i))         responseITMObject[propertyName] = this.getInstanceClassName(instance);
+               /* "instancename":"" */
+               if (propertyName.match(/^name/i))              responseITMObject[propertyName] = this.getInstanceName(instance);
+               /* "instancedisplayname":"" */
+               if (propertyName.match(/^displayName/i))       responseITMObject[propertyName] = this.getInstanceDisplayName(instance);
+               /* "instancedescription":"" */
+               if (propertyName.match(/^description/i))       responseITMObject[propertyName] = this.getInstanceDescription(instance);
+               /* "status":"" */
+               if (propertyName.match(/^status/i))            responseITMObject[propertyName] = this.getInstanceStatus(instance);
+               /* "instances":"" */
+               if (propertyName.match(/^instances/i))         responseITMObject[propertyName] = this.getInstances(instance);
+               /* "instancemethods":"" */
+               if (propertyName.match(/^methods/i))           responseITMObject[propertyName] = this.getInstanceMethods(instance);
+               /* "instanceproperties":"" */
+               if (propertyName.match(/^properties/i))        responseITMObject[propertyName] = this.getInstanceProperties(instance);
+               /* "domethod(<method>({json})":"" */
+               if (propertyName.match(/^domethod/i)) {
+                  var myRegexp = /^domethod\((.+)\)$/g;
+                  var method = myRegexp.exec(propertyName);
 
-                    if (method.length == 2) { /* valid doMethod received */
-                        this.debugMessage("getITMObjectData: doInstanceMethod([{0}],[{1}])".format(instance, method[1]));
+                  if (method.length == 2) { /* valid doMethod received */
+                     this.debugMessage("getITMObjectData: doInstanceMethod([{0}],[{1}])".format(instance, method[1]));
+                     responseITMObject[propertyName] = this.doInstanceMethod(instance, method[1]);
+                  } else { /* invalid doMethod received */
+                     this.debugMessage("getITMObjectData: doInstanceMethod regexpr failed, not handling method");
+                  }
+               }
+               /* "setpropertyvalue(<property>)":"<value>" */
+               if (propertyName.match(/^setpropertyvalue/i)) {
+                  var myRegexp = /^setpropertyvalue\((.+)\)$/g;
+                  var property = myRegexp.exec(propertyName);
 
-                        responseITMObject[propertyName] = this.doInstanceMethod(instance, method[1]);
-                    } else { /* invalid doMethod received */
-                        this.debugMessage("getITMObjectData: doInstanceMethod regexpr failed, not handling method");
-                    }
-                }
-                /* "setpropertyvalue(<property>)":"<value>" */
-                else if (propertyName.match(/^setpropertyvalue/i)) {
-                    var myRegexp = /^setpropertyvalue\((.+)\)$/g;
-                    var property = myRegexp.exec(propertyName);
+                  // this.debugMessage("getITMObjectData: setInstancePropertyValue : RegExpr length=[{0}]".format(property.length));
+                  this.debugMessage("getITMObjectData: setInstancePropertyValue({0}) regexpr retrieved [{1}]".format(propertyName, property[1]));
+                  if (property.length == 2) {
+                     this.debugMessage("getITMObjectData: setInstancePropertyValue: instance=[{0}], property=[{1}], value=[{2}]".format(instance, property[1], propertyValue));
+                     responseITMObject[propertyName] = this.setInstancePropertyValue(instance, property[1], propertyValue);
+                  } else {
+                     this.debugMessage("getITMObjectData: setInstancePropertyValue: regexpr failed, not handling");
+                  }
+               }
+               /* "getpropertyvalue(<property>)":"" */
+               if (propertyName.match(/^getpropertyvalue/i)) {
+                  var myRegexp = /^getpropertyvalue\((.+)\)$/g;
+                  var property = myRegexp.exec(propertyName);
 
-                    // this.debugMessage("getITMObjectData: setInstancePropertyValue : RegExpr length=[{0}]".format(property.length));
-                    this.debugMessage("getITMObjectData: setInstancePropertyValue({0}) regexpr retrieved [{1}]".format(propertyName, property[1]));
-                    if (property.length == 2) {
-                        this.debugMessage("getITMObjectData: setInstancePropertyValue: instance=[{0}], property=[{1}], value=[{2}]".format(instance, property[1], propertyValue));
-                        responseITMObject[propertyName] = this.setInstancePropertyValue(instance, property[1], propertyValue);
-                    } else {
-                        this.debugMessage("getITMObjectData: setInstancePropertyValue: regexpr failed, not handling");
-                    }
-                }
-                /* "getpropertyvalue(<property>)":"" */
-                else if (propertyName.match(/^getpropertyvalue/i)) {
-                    var myRegexp = /^getpropertyvalue\((.+)\)$/g;
-                    var property = myRegexp.exec(propertyName);
-
-                    // this.debugMessage("getITMObjectData: getpropertyvalue : RegExpr length=[{0}]".format(property.length));
-                    this.debugMessage("getITMObjectData: getInstancePropertyValue({0}) regexpr retrieved [{1}]".format(propertyName, property[1]));
-                    if (property.length == 2) {
-                        responseITMObject[propertyName] = this.getInstancePropertyValue(instance, property[1]);
-                        this.debugMessage("getITMObjectData: getInstancePropertyValue: instance=[{0}], property=[{1}], value=[{2}]".format(instance, property[1], propertyValue));
-                    } else {
-                        this.debugMessage("getITMObjectData: getInstancePropertyValue: regexpr failed, not handling");
-                    }
-                } else { /* undefined JSON propertyName */
-                    this.debugMessage("getITMObjectData: unhandled propertyName=[{0}], propertyValue=[{1}]".format(propertyName, propertyValue));
-                }
+                  // this.debugMessage("getITMObjectData: getpropertyvalue : RegExpr length=[{0}]".format(property.length));
+                  this.debugMessage("getITMObjectData: getInstancePropertyValue({0}) regexpr retrieved [{1}]".format(propertyName, property[1]));
+                  if (property.length == 2) {
+                     responseITMObject[propertyName] = this.getInstancePropertyValue(instance, property[1]);
+                     this.debugMessage("getITMObjectData: getInstancePropertyValue: instance=[{0}], property=[{1}], value=[{2}]".format(instance, property[1], propertyValue));
+                  } else {
+                     this.debugMessage("getITMObjectData: getInstancePropertyValue: regexpr failed, not handling");
+                  }
+               }
             }
         } else {
             this.debugMessage("getITMObjectData: Invalid request, no instance selected");

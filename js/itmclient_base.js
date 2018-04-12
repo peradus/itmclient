@@ -46,9 +46,7 @@ function ITMClient_base() {
         /* base object does nothing on load */
 
         /* do actionfinished if function is defined */
-        if (isFunction(actionfinished)) {
-            actionfinished();
-        }
+        safeCallBack(actionfinished);
     }
   
   /************************************************************************
@@ -427,7 +425,6 @@ ITMClient_base.prototype.getITMObject = function(obj, instance, setobj) {
       return getITMObject(obj, instance, setobj);
 };
 
-
 /**
  * function ITMObject_base.doInstanceMethod(instance,method)
  * @param {*} instance - selected instance to get
@@ -437,13 +434,9 @@ ITMClient_base.prototype.getITMObject = function(obj, instance, setobj) {
 ITMClient_base.prototype.doInstanceMethod = function(instance, method, callback) {
    var methodResult = this.getInstanceStatus(instance);
    this.debugMessage("itmClient: doInstanceMethod [{0}] method:[{1}], result=[{2}]".format(instance, method, methodResult));
-   if (isFunction(callback)) {
-         callback(methodResult);
-   }
+   safeCallBack(callback,methodResult);
    return methodResult;
 };
-
-
 
 /* ****************************************************************************
  * ITMCLIENT_BASE OBJECT-END

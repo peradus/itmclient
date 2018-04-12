@@ -79,7 +79,7 @@ function INSTANCE_ITMOBJECT_FIELDS() {
 // JQUERY HELPER TO CHECK FOR RESULTS
 
 function safeCallBack(callBackFunction, data) { 
-   if (isFunction(callBackFunction)) callBackFunction(data);
+   if (isFunction(callBackFunction)) return callBackFunction(data);
 }
 
 function removeChildElements(el) {
